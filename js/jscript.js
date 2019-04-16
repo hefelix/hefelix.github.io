@@ -26,19 +26,19 @@ $('.start-tabata').click(function () {
 
 // Set the counter vars
 var currentTime = 5; // initialise get ready 5 sec
-var startOfSet = 20;
-var startOfShortPause = 10;
-var startOfLongPause = 45;
+var startOfSet = 20; // 20
+var startOfShortPause = 10; //10
+var startOfLongPause = 45; // 45
 
 var tabataState = 4; // 0 = notActive, 1=Actie, 2=PauseShort, 3=pauseLong, 4=initialise
 var currentSet = 1;
 var currentExercise = 0;
 
 var myTab = document.getElementById("MyTable");
-var nrOfRows = myTab.tBodies[0].rows[0].cells.length;
+var nrOfRows = myTab.tBodies[0].rows.length;
 var nrOfSetsPerExercise = [];
-for (i = 1; i < nrOfRows; i++) { 
-  nrOfSetsPerExercise[i-1] = myTab.tBodies[0].rows[i].cells[1].innerHTML; 
+for (i = 1; i < nrOfRows; i++) {
+  nrOfSetsPerExercise[i-1] = myTab.tBodies[0].rows[i].cells[1].innerHTML;
 }
 var numOfExercises = nrOfRows-2; // -1 for "top row" and -1 for idx from 0
 
@@ -49,9 +49,9 @@ var x = setInterval(function() {
 	document.getElementById("startSound").play();
 	document.getElementById("timer").innerHTML = "GET READY!!";
   }
-  
-	switch (tabataState) 
-    {        
+
+	switch (tabataState)
+    {
 		case 0: // Not active/done
 			currentTime = 0;
             break;
@@ -64,13 +64,13 @@ var x = setInterval(function() {
 				tabataState = 2;
 			} else if(currentExercise < numOfExercises){
 				currentTime = startOfLongPause;
-				tabataState = 3;			 
+				tabataState = 3;
 			} else { // tabata is over
 			 tabataState = 0;
 			}
 			break;
 
-        case 2: // ShortPause            
+        case 2: // ShortPause
 			if (currentTime > 0){
 				currentTime--;
 			}else {
@@ -78,8 +78,8 @@ var x = setInterval(function() {
 				currentSet++;
 				tabataState = 1;
 			}
-			break;	
-		case 3: // LongPause            
+			break;
+		case 3: // LongPause
 			if (currentTime > 0){
 				currentTime--;
 			}else {
@@ -88,15 +88,15 @@ var x = setInterval(function() {
 				currentExercise++;
 				tabataState = 1;
 			}
-			break;		
+			break;
 		case 4:
 			if (currentTime > 0){
 				currentTime--;
 			}else {
 				currentTime = startOfSet;
-				tabataState = 1;		
-				document.getElementById("startSound").play();	
-				document.getElementById("timer").innerHTML = currentTime;				
+				tabataState = 1;
+				document.getElementById("startSound").play();
+				document.getElementById("timer").innerHTML = currentTime;
 			}
 			break;
 		default:
