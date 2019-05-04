@@ -46,7 +46,7 @@ var numOfExercises = nrOfRows-2; // -1 for "top row" and -1 for idx from 0
 var x = setInterval(function() {
 	// Starting up
 	if (tabataState == 4){
-	document.getElementById("startSound").play();
+	document.getElementById("getReadySound").play();
 	document.getElementById("timer").innerHTML = "GET READY!!";
   }
 
@@ -95,7 +95,7 @@ var x = setInterval(function() {
 			}else {
 				currentTime = startOfSet;
 				tabataState = 1;
-				document.getElementById("startSound").play();
+				document.getElementById("startSetSound").play();
 				document.getElementById("timer").innerHTML = currentTime;
 			}
 			break;
@@ -108,9 +108,14 @@ var x = setInterval(function() {
   document.getElementById("timer").innerHTML = currentTime;
   document.getElementById("setreps").innerHTML = currentSet + "/" + nrOfSetsPerExercise[currentExercise];
   }
-  if ((tabataState == 2 || tabataState == 3) && (currentTime == 1 || currentTime == 3)){
-	document.getElementById("startSound").play();
-}
+  // play audio if suitable
+  if ((tabataState == 2 || tabataState == 3) && (currentTime == 1)){
+	document.getElementById("startSetSound").play();
+  }
+  if (tabataState == 1 && currentTime == 1){
+    document.getElementById("endSetSound").play();
+  }
+
 }, 1000);
 });
 
